@@ -88,9 +88,11 @@ class TestGoogleDrive < Test::Unit::TestCase
              .any? { |s| s.title == ss_title }
     end
 
-    ws2 = session.worksheet_by_url(ws.cells_feed_url)
-    assert { ws2.cells_feed_url == ws.cells_feed_url }
-    assert { ws2.title == 'hoge' }
+    # The Google Sheets API v3 was turned down on August 2, 2021.
+    # see https://developers.google.com/workspace/sheets/api/guides/migration
+    # ws2 = session.worksheet_by_url(ws.cells_feed_url)
+    # assert { ws2.cells_feed_url == ws.cells_feed_url }
+    # assert { ws2.title == 'hoge' }
 
     ss_copy = ss.duplicate(ss_copy_title)
     assert do
@@ -361,8 +363,8 @@ class TestGoogleDrive < Test::Unit::TestCase
     unless @@session
       puts(
         "\nThis test will create files/spreadsheets/collections with your " \
-        'account, read/write them and finally delete them (if everything ' \
-        'succeeds).'
+          'account, read/write them and finally delete them (if everything ' \
+          'succeeds).'
       )
 
       account_path = File.join(File.dirname(__FILE__), 'account.yaml')
@@ -371,11 +373,11 @@ class TestGoogleDrive < Test::Unit::TestCase
         raise(
           format(
             "%s is deprecated. Please delete it.\n" \
-            'Instead, follow one of the instructions here to create either ' \
-            'config.json or a service account key JSON file and put it at ' \
-            "%s:\n" \
-            'https://github.com/gimite/google-drive-ruby/blob/master/' \
-            "README.md\#how-to-use",
+              'Instead, follow one of the instructions here to create either ' \
+              'config.json or a service account key JSON file and put it at ' \
+              "%s:\n" \
+              'https://github.com/gimite/google-drive-ruby/blob/master/' \
+              "README.md\#how-to-use",
             account_path, config_path
           )
         )
@@ -384,11 +386,11 @@ class TestGoogleDrive < Test::Unit::TestCase
         raise(
           format(
             "%s is missing.\n" \
-            'Follow one of the instructions here to create either ' \
-            'config.json or a service account key JSON file and put it at ' \
-            "%s:\n" \
-            'https://github.com/gimite/google-drive-ruby/blob/master/doc/' \
-            'authorization.md',
+              'Follow one of the instructions here to create either ' \
+              'config.json or a service account key JSON file and put it at ' \
+              "%s:\n" \
+              'https://github.com/gimite/google-drive-ruby/blob/master/doc/' \
+              'authorization.md',
             config_path, config_path
           )
         )
@@ -396,8 +398,8 @@ class TestGoogleDrive < Test::Unit::TestCase
 
       @@session = GoogleDrive::Session.from_config(
         config_path,
-        client_options: {transparent_gzip_decompression: true},
-        request_options: {retries: 3}
+        client_options: { transparent_gzip_decompression: true },
+        request_options: { retries: 3 }
       )
     end
     @@session
