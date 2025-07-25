@@ -4,6 +4,7 @@ This is a Ruby library to read/write files/spreadsheets in Google Drive/Docs.
 
 NOTE: This is NOT a library to create Google Drive App.
 
+NOTE: ⚠️This is an unofficial maintained fork of google-drive-ruby, originally created by Hiroshi Ichikawa.
 
 * [Migration from ver. 2.x.x or before](#migration)
 * [How to install](#install)
@@ -27,7 +28,7 @@ There are some incompatible API changes. See
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'google_drive'
+gem 'google_drive_maintained'
 ```
 
 And then execute:
@@ -39,13 +40,13 @@ $ bundle
 Or install it yourself as:
 
 ```
-$ gem install google_drive
+$ gem install google_drive_maintained
 ```
 
 If you need system wide installation, execute below:
 
 ```
-$ sudo gem install google_drive
+$ sudo gem install google_drive_maintained
 ```
 
 ## <a name="use">How to use</a>
@@ -57,7 +58,7 @@ Follow one of the options in [Authorization](https://github.com/gimite/google-dr
 ### Example to read/write files in Google Drive
 
 ```ruby
-require "google_drive"
+require "google_drive_maintained"
 
 # Creates a session. This will prompt the credential via command line for the
 # first time and save it to config.json file for later usages.
@@ -84,7 +85,7 @@ file.update_from_file("/path/to/hello.txt")
 ### Example to read/write spreadsheets
 
 ```ruby
-require "google_drive"
+require "google_drive_maintained"
 
 # Creates a session. This will prompt the credential via command line for the
 # first time and save it to config.json file for later usages.
@@ -128,7 +129,7 @@ New BSD Licence.
 
 ## <a name="environments">Supported environments</a>
 
-Ruby 2.0.0 or later. Checked with Ruby 2.4.1.
+Ruby 3.0.0 or later. Checked with Ruby 3.3.0.
 
 
 ## <a name="author">Author</a>
