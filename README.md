@@ -58,7 +58,7 @@ Follow one of the options in [Authorization](https://github.com/gimite/google-dr
 ### Example to read/write files in Google Drive
 
 ```ruby
-require "google_drive_maintained"
+require "google_drive"
 
 # Creates a session. This will prompt the credential via command line for the
 # first time and save it to config.json file for later usages.
@@ -85,7 +85,7 @@ file.update_from_file("/path/to/hello.txt")
 ### Example to read/write spreadsheets
 
 ```ruby
-require "google_drive_maintained"
+require "google_drive"
 
 # Creates a session. This will prompt the credential via command line for the
 # first time and save it to config.json file for later usages.

@@ -10,3 +10,10 @@ Rake::TestTask.new('test') do |t|
   t.verbose = false
   t.warning = false
 end
+
+desc 'Run unit test for ci'
+Rake::TestTask.new('test_ci') do |t|
+  t.pattern = 'test/test_ci.rb'
+  t.verbose = false
+  t.warning = false
+end

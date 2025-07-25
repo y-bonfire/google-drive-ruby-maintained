@@ -25,11 +25,11 @@ module GoogleDrive
     end
 
     def to_s
-      value.to_s
+      @value.to_s
     end
 
     def encoding
-      value.respond_to?(:encoding) ? value.encoding : nil
+      @value.respond_to?(:encoding) ? value.encoding : nil
     end
 
     def background_color=(color)
