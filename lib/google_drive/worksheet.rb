@@ -8,6 +8,7 @@ require 'uri'
 require 'google_drive/util'
 require 'google_drive/error'
 require 'google_drive/list'
+require_relative "worksheet_formatting"
 
 module GoogleDrive
   # A worksheet (i.e. a tab) in a spreadsheet.
@@ -15,6 +16,7 @@ module GoogleDrive
   # object.
   class Worksheet
     include(Util)
+    include(WorksheetFormatting)
 
     # A few default color instances that match the colors from the Google Sheets web UI.
     #
@@ -168,7 +170,8 @@ module GoogleDrive
     #   worksheet["A2"]  #=> "hoge"
     def [](*args)
       (row, col) = parse_cell_args(args)
-      cells[[row, col]] || ''
+      value = cells[[row, col]] || ''
+      Cell.new(self, row, col, value)
     end
 
     # Updates content of the cell.
