@@ -1,10 +1,19 @@
-# google-drive-ruby [![Build Status](https://travis-ci.org/gimite/google-drive-ruby.svg?branch=master)](https://travis-ci.org/gimite/google-drive-ruby)
+# google-drive-ruby [![CI](https://github.com/y-bonfire/google-drive-ruby-maintained/actions/workflows/test.yml/badge.svg)](https://github.com/y-bonfire/google-drive-ruby-maintained/actions/workflows/test.yml)
 
 This is a Ruby library to read/write files/spreadsheets in Google Drive/Docs.
 
 NOTE: This is NOT a library to create Google Drive App.
 
 NOTE: ⚠️This is an unofficial maintained fork of google-drive-ruby, originally created by Hiroshi Ichikawa.
+We focus on preserving compatibility and fixing bugs, with minimal disruptive changes.
+New features may be added carefully when justified, but the core behavior will remain stable.
+
+✅ GitHub Actions Integration
+We've started testing this library with GitHub Actions:
+👉 [CI Workflow Link](https://github.com/y-bonfire/google-drive-ruby-maintained/actions)
+
+This enables automated testing on every push and pull request, helping ensure long-term reliability.
+We welcome feedback and contributions to improve the CI process or test coverage. 🤗
 
 * [Migration from ver. 2.x.x or before](#migration)
 * [How to install](#install)
