@@ -1,4 +1,7 @@
-# google-drive-ruby [![CI](https://github.com/y-bonfire/google-drive-ruby-maintained/actions/workflows/test.yml/badge.svg)](https://github.com/y-bonfire/google-drive-ruby-maintained/actions/workflows/test.yml)
+# google-drive-ruby
+
+[![Gem](https://img.shields.io/gem/v/google_drive_maintained.svg)](https://rubygems.org/gems/google_drive_maintained)
+[![GitHub Actions Workflow Status](https://github.com/y-bonfire/google-drive-ruby-maintained/actions/workflows/test.yml/badge.svg)](https://github.com/y-bonfire/google-drive-ruby-maintained/actions/workflows/test.yml)
 
 This is a Ruby library to read/write files/spreadsheets in Google Drive/Docs.
 
