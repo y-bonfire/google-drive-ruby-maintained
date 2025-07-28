@@ -145,7 +145,7 @@ New BSD Licence.
 
 ## <a name="environments">Supported environments</a>
 
-Ruby 3.0.0 or later. Checked with Ruby 3.3.0.
+Ruby 3.2.0 or later. Checked with Ruby 3.3.0.
 
 
 ## <a name="author">Author</a>
