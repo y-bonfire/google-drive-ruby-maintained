@@ -7,3 +7,4 @@ test/config.json
 .rvmrc
 Gemfile.lock
 .idea
+.gem_rbs_collection
