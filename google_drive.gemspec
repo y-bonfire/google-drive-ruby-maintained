@@ -20,11 +20,11 @@ Gem::Specification.new do |spec|
     "documentation_uri" => "https://rubydoc.info/gems/google_drive_ruby_maintained"
   }
 
-  spec.add_dependency('nokogiri', ['>= 1.13', '< 2.0.0'])
+  spec.add_dependency('nokogiri', ['>= 1.18', '< 2.0.0'])
   spec.add_dependency('google-apis-drive_v3', '>= 0.5.0')
   spec.add_dependency('google-apis-sheets_v4', '>= 0.4.0')
-  spec.add_dependency('googleauth', ['>= 1.10'])
+  spec.add_dependency('googleauth', ['>= 1.14'])
   spec.add_development_dependency('test-unit', ['>= 3.0.0', '< 4.0.0'])
-  spec.add_development_dependency('rake', ['>= 0.8.0'])
+  spec.add_development_dependency('rake', ['>= 13.0.3'])
   spec.add_development_dependency('rspec-mocks', ['>= 3.4.0', '< 4.0.0'])
 end
