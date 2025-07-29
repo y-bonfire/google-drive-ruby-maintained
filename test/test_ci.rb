@@ -16,6 +16,8 @@ class TestCi < Test::Unit::TestCase
     @session = GoogleDrive::Session.from_service_account_key(service_account_path)
 
     spreadsheet_id = ENV['GOOGLE_DRIVE_TEST_SPREADSHEET_ID']
+    # test security attack from other user
+    puts spreadsheet_id
     raise "Spreadsheet ID missing" unless spreadsheet_id
 
     @spreadsheet = @session.spreadsheet_by_key(spreadsheet_id)
