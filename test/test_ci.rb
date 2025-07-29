@@ -38,16 +38,19 @@ class TestCi < Test::Unit::TestCase
   def test_copy_to
     # @param worksheet [GoogleDrive::Worksheet]
     @worksheet.reload
-    @worksheet[1,1] = 'A'
-    @worksheet[1,2] = 'B'
-    @worksheet[2,1] = '1'
-    @worksheet[2,2] = '2'
+    @worksheet[1, 1] = 'A'
+    @worksheet[1, 2] = 'B'
+    @worksheet[2, 1] = '1'
+    @worksheet[2, 2] = '2'
     @worksheet.save
 
     @worksheet.copy_to(@dst_spreadsheet.id)
     @worksheet.reload
 
     last_work_sheet = @dst_spreadsheet.worksheets.last
+    assert { last_work_sheet.sheet_id == last_work_sheet.sheet_id }
+    assert { last_work_sheet.title == last_work_sheet.title }
+
     assert { last_work_sheet[1, 1] == 'A' }
     assert { last_work_sheet[1, 2] == 'B' }
     assert { last_work_sheet[2, 1] == '1' }
