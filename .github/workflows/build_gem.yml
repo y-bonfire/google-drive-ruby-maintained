@@ -15,7 +15,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3' 
+          ruby-version: '3.3'
 
       - name: Install bundler
         run: gem install bundler
@@ -28,3 +28,9 @@ jobs:
 
       - name: Show built gem
         run: ls -lh *.gem
+
+      - name: Upload built gem
+        uses: actions/upload-artifact@v4
+        with:
+          name: google_drive_gem
+          path: google_drive-*.gem
