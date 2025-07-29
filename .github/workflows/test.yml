@@ -28,3 +28,7 @@ jobs:
         run: bundle exec rake test_ci
         env:
           GOOGLE_DRIVE_TEST_SPREADSHEET_ID: ${{ secrets.GOOGLE_DRIVE_TEST_SPREADSHEET_ID }}
+
+      - name: Run bundler-audit
+        run: |
+          bundle audit check --update

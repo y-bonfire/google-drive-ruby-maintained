@@ -32,3 +32,7 @@ base64 -w 0 service_account.json > encoded.txt
 ⚠️It is necessary to be careful not to leak credentials, and to avoid accidentally committing
 
 Secrets are not exposed to PRs from forked repositories for security reasons.
+
+
+The security issue is explained in detail here
+
