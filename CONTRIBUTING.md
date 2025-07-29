@@ -35,4 +35,4 @@ Secrets are not exposed to PRs from forked repositories for security reasons.
 
 
 The security issue is explained in detail here
-
+[Security](SECURITY.md)

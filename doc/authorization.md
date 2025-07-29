@@ -14,13 +14,13 @@ If you want your program to access Google Drive with your own account, or the ac
 
 1. Go to the [API library page](https://console.developers.google.com/apis/library) in the Google Developer Console.
 1. Create a new project, or select an existing project.<br>
-![](https://raw.githubusercontent.com/gimite/google-drive-ruby/master/doc/images/create_project.png)
+![](images/create_project.png)
 1. Enable "Google Drive API" and "Google Sheets API" for the project on the page.
 1. Go to the [credentials page](https://console.developers.google.com/apis/credentials) in the Google Developer Console for the same project.
 1. Click "Create credentials" -> "OAuth client ID".<br>
-![](https://raw.githubusercontent.com/gimite/google-drive-ruby/master/doc/images/oauth_client_id.png)
+![](images/oauth_client_id.png)
 1. Choose "Other" for "Application type".<br>
-![](https://raw.githubusercontent.com/gimite/google-drive-ruby/master/doc/images/app_type_other.png)
+![](images/app_type_other.png)
 1. Click "Create" and take note of the generated client ID and client secret.
 1. Activate the Drive API for your project in the [Google API Console](https://console.developers.google.com/apis/library).
 1. Create a file config.json which contains the client ID and client secret you got above, which looks like:
@@ -44,13 +44,13 @@ If you are developing a web app, and want your web app user to authorize with th
 
 1. Go to the [API library page](https://console.developers.google.com/apis/library) in the Google Developer Console.
 1. Create a new project, or select an existing project.<br>
-![](https://raw.githubusercontent.com/gimite/google-drive-ruby/master/doc/images/create_project.png)
+![](images/create_project.png)
 1. Enable "Google Drive API" and "Google Sheets API" for the project on the page.
 1. Go to the [credentials page](https://console.developers.google.com/apis/credentials) in the Google Developer Console for the same project.
 1. Click "Create credentials" -> "OAuth client ID".<br>
-![](https://raw.githubusercontent.com/gimite/google-drive-ruby/master/doc/images/oauth_client_id.png)
+![](images/oauth_client_id.png)
 1. Choose "Web application" for "Application type", and fill in the form.<br>
-![](https://raw.githubusercontent.com/gimite/google-drive-ruby/master/doc/images/app_type_web.png)
+![](images/app_type_web.png)
 1. Click "Create" and take note of the generated client ID and client secret.
 1. Activate the Drive API for your project in the [Google API Console](https://console.developers.google.com/apis/library).
 1. Write code like this to get auth_url:
@@ -107,11 +107,11 @@ To use a service account, follow these steps:
 
 1. Go to the [API library page](https://console.developers.google.com/apis/library) in the Google Developer Console.
 1. Create a new project, or select an existing project.<br>
-![](https://raw.githubusercontent.com/gimite/google-drive-ruby/master/doc/images/create_project.png)
+![](images/create_project.png)
 1. Enable "Google Drive API" and "Google Sheets API" for the project on the page.
 1. Go to the [credentials page](https://console.developers.google.com/apis/credentials) in the Google Developer Console for the same project.
 1. Click "Create credentials" -> "Service account".<br>
-![](https://raw.githubusercontent.com/gimite/google-drive-ruby/master/doc/images/service_account.png)
+![](images/service_account.png)
 1. Click "Create" and download the keys as a JSON file.
 1. Activate the Drive API for your project in the [Google API Console](https://console.developers.google.com/apis/library).
 1. Construct a session object by code like this, passing the path to the downloaded JSON file:
