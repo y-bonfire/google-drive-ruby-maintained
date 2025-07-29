@@ -5,33 +5,62 @@ require 'bundler/setup'
 require 'highline'
 require 'test/unit'
 require 'google_drive'
+require_relative 'test_helper'
 
 class TestCi < Test::Unit::TestCase
-  PREFIX = ''.freeze
-
-  @@session = nil
-
   def setup
     service_account_path = File.join(File.dirname(__FILE__), 'service_account.json')
     @session = GoogleDrive::Session.from_service_account_key(service_account_path)
 
     spreadsheet_id = ENV['GOOGLE_DRIVE_TEST_SPREADSHEET_ID']
+    dst_spreadsheet_id = ENV['DST_GOOGLE_DRIVE_TEST_SPREADSHEET_ID']
     raise "Spreadsheet ID missing" unless spreadsheet_id
+    raise "Destination Spreadsheet ID missing" unless dst_spreadsheet_id
 
     @spreadsheet = @session.spreadsheet_by_key(spreadsheet_id)
-    @ws = @spreadsheet.worksheets.first
+    @worksheet = @spreadsheet.worksheets.first
+    @dst_spreadsheet = @session.spreadsheet_by_key(dst_spreadsheet_id)
   end
 
   def test_read_and_write
-    original = @ws[1, 1]
+    original = @worksheet[1, 1]
     test_value = "CI_TEST_#{Time.now.to_i}"
-    @ws[1, 1] = test_value
-    @ws.save
+    @worksheet[1, 1] = test_value
+    @worksheet.save
     sleep 1
-    @ws.reload
-    assert { @ws[1, 1] == test_value }
+    @worksheet.reload
+    assert { @worksheet[1, 1] == test_value }
   ensure
-    @ws[1, 1] = original
-    @ws.save
+    @worksheet[1, 1] = original
+    @worksheet.save
+  end
+
+  def test_copy_to
+    # @param worksheet [GoogleDrive::Worksheet]
+    @worksheet.reload
+    @worksheet[1, 1] = 'A'
+    @worksheet[1, 2] = 'B'
+    @worksheet[2, 1] = '1'
+    @worksheet[2, 2] = '2'
+    @worksheet.save
+
+    @worksheet.copy_to(@dst_spreadsheet.id)
+    @worksheet.reload
+
+    last_work_sheet = @dst_spreadsheet.worksheets.last
+    assert { last_work_sheet.sheet_id == last_work_sheet.sheet_id }
+    assert { last_work_sheet.title == last_work_sheet.title }
+
+    assert { last_work_sheet[1, 1] == 'A' }
+    assert { last_work_sheet[1, 2] == 'B' }
+    assert { last_work_sheet[2, 1] == '1' }
+    assert { last_work_sheet[2, 2] == '2' }
+
+    # @param dst_spreadsheet [GoogleDrive::Spreadsheet]
+    @dst_spreadsheet.worksheets.each_with_index do |sheet, index|
+      next if index == 0
+      sheet.delete
+    end
+    @dst_spreadsheet.worksheets[0].reload
   end
 end
