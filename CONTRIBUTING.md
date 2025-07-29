@@ -1,3 +1,12 @@
+🧠 AI-assisted Maintenance
+
+To help ensure sustainability, I actively use AI tools (such as GitHub Copilot or ChatGPT) to review code, analyze issues, and streamline maintenance tasks.
+
+This allows for more efficient handling of updates, tests, and documentation, especially when time or contributors are limited.
+
+Community input is still highly valued, but I believe combining human intent with AI support can lead to better continuity.
+
+
 ## Manual unit tests Overview
 Tests can be run in the terminal at hand with various authentication methods. As I will explain later, CI with GithubAction is limited to using a service account.
 
