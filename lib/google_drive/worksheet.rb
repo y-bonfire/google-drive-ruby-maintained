@@ -153,8 +153,8 @@ module GoogleDrive
       request = Google::Apis::SheetsV4::CopySheetToAnotherSpreadsheetRequest.new(
         destination_spreadsheet_id: destination_spreadsheet_id,
       )
-      response = @session.sheets_service.copy_spreadsheet(spreadsheet.id, sheet_id, request)
-      Worksheet.new(@session, spreadsheet, response)
+      @session.sheets_service.copy_spreadsheet(spreadsheet.id, sheet_id, request)
+      nil
     end
 
     # Copy worksheet to owner spreadsheet.
