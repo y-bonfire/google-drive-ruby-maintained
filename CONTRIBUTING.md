@@ -15,6 +15,19 @@ This repository uses a simple `develop` → `main` workflow, even for solo maint
 - This helps ensure traceability and safer updates, even when working solo.
 
 
+## 🔧 Gem Build Process
+The .gem package is not built manually in this project.
+Instead, the build process is automated using GitHub Actions.
+
+The workflow runs gem build to generate the .gem file.
+
+The built file is uploaded as an artifact and can be downloaded from the [Actions] tab on GitHub.
+
+This ensures consistent builds across environments and prevents manual errors,
+contributing to a more reliable and reproducible release process.
+
+- Workflow file: `.github/workflows/build_gem.yml`
+
 ## Manual unit tests Overview
 Tests can be run in the terminal at hand with various authentication methods. As I will explain later, CI with GithubAction is limited to using a service account.
 
