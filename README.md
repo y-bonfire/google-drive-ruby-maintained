@@ -7,9 +7,13 @@ This is a Ruby library to read/write files/spreadsheets in Google Drive/Docs.
 
 NOTE: This is NOT a library to create Google Drive App.
 
-NOTE: ⚠️This is an unofficial maintained fork of google-drive-ruby, originally created by Hiroshi Ichikawa.
+## Introduction
+⚠️This is an unofficial maintained fork of [gimite/google-drive-ruby](https://github.com/gimite/google-drive-ruby), originally created by Hiroshi Ichikawa.
+
 We focus on preserving compatibility and fixing bugs, with minimal disruptive changes.
 New features may be added carefully when justified, but the core behavior will remain stable.
+
+See [this issue](https://github.com/y-bonfire/google-drive-ruby-maintained/issues/7) for background and intent.
 
 ✅ GitHub Actions Integration
 We've started testing this library with GitHub Actions:
@@ -17,6 +21,8 @@ We've started testing this library with GitHub Actions:
 
 This enables automated testing on every push and pull request, helping ensure long-term reliability.
 We welcome feedback and contributions to improve the CI process or test coverage. 🤗
+
+## table of contents
 
 * [Migration from ver. 2.x.x or before](#migration)
 * [How to install](#install)
