@@ -8,3 +8,4 @@ test/config.json
 Gemfile.lock
 .idea
 .gem_rbs_collection
+.env
