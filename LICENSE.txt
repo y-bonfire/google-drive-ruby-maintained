@@ -1,3 +1,5 @@
+BSD 3-Clause License
+
 The license of this software is "New BSD Licence".
 
 Copyright (c) 2013, Hiroshi Ichikawa <http://gimite.net/>

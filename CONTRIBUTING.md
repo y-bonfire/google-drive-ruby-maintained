@@ -1,10 +1,18 @@
-🧠 AI-assisted Maintenance
+## 🧠 AI-assisted Maintenance
 
 To help ensure sustainability, I actively use AI tools (such as GitHub Copilot or ChatGPT) to review code, analyze issues, and streamline maintenance tasks.
 
 This allows for more efficient handling of updates, tests, and documentation, especially when time or contributors are limited.
 
-Community input is still highly valued, but I believe combining human intent with AI support can lead to better continuity.
+
+## 🧪 Development flow
+
+This repository uses a simple `develop` → `main` workflow, even for solo maintenance.
+
+- All development is done on the `develop` branch.
+- Pull requests are created to merge changes into `main`.
+- GitHub Actions CI is triggered for each pull request.
+- This helps ensure traceability and safer updates, even when working solo.
 
 
 ## Manual unit tests Overview
