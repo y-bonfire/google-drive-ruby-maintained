@@ -21,8 +21,8 @@ Gem::Specification.new do |spec|
   }
 
   spec.add_dependency('nokogiri', ['>= 1.18', '< 2.0.0'])
-  spec.add_dependency('google-apis-drive_v3', '>= 0.5.0')
-  spec.add_dependency('google-apis-sheets_v4', '>= 0.4.0')
+  spec.add_dependency('google-apis-drive_v3', '>= 0.63.0')
+  spec.add_dependency('google-apis-sheets_v4', '>= 0.42.0')
   spec.add_dependency('googleauth', ['>= 1.14'])
   spec.add_development_dependency('test-unit', ['>= 3.0.0', '< 4.0.0'])
   spec.add_development_dependency('rake', ['>= 13.0.3'])

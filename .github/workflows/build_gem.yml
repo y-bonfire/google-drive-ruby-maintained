@@ -1,0 +1,36 @@
+# .github/workflows/build_gem.yml
+name: Build Gem
+
+on:
+  push:
+    branches: [ main, develop ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+
+      - name: Install bundler
+        run: gem install bundler
+
+      - name: Install dependencies
+        run: bundle install
+
+      - name: Build gem
+        run: gem build google_drive.gemspec
+
+      - name: Show built gem
+        run: ls -lh *.gem
+
+      - name: Upload built gem
+        uses: actions/upload-artifact@v4
+        with:
+          name: google_drive_maintained_gem
+          path: google_drive_maintained-*.gem

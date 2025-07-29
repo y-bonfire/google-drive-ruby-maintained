@@ -15,6 +15,12 @@ New features may be added carefully when justified, but the core behavior will r
 
 See [this issue](https://github.com/y-bonfire/google-drive-ruby-maintained/issues/7) for background and intent.
 
+## Contributing
+
+We are actively working on improving the library, updating dependencies, and refining the development workflow.  
+If you'd like to contribute, please check [CONTRIBUTING.md](./CONTRIBUTING.md) for up-to-date contribution guidelines and technical notes (CI, testing, gem build, etc.).
+
+
 ✅ GitHub Actions Integration
 We've started testing this library with GitHub Actions:
 👉 [CI Workflow Link](https://github.com/y-bonfire/google-drive-ruby-maintained/actions)
@@ -72,10 +78,6 @@ $ sudo gem install google_drive_maintained
 ### Authorization
 
 Follow one of the options in [Authorization](doc/authorization.md) to construct a session object. The example code below assumes "On behalf of you" option.
-
-### Contributing
-
-[Contributing](CONTRIBUTING.md) 
 
 ### Example to read/write files in Google Drive
 
