@@ -32,3 +32,13 @@ base64 -w 0 service_account.json > encoded.txt
 ⚠️It is necessary to be careful not to leak credentials, and to avoid accidentally committing
 
 Secrets are not exposed to PRs from forked repositories for security reasons.
+
+
+## 🔐 Security Audit
+
+We use [`bundler-audit`](https://github.com/rubysec/bundler-audit) to check for known vulnerabilities in gem dependencies.
+
+### Run manually
+
+```bash
+bundle audit check --update
