@@ -42,3 +42,15 @@ We use [`bundler-audit`](https://github.com/rubysec/bundler-audit) to check for 
 
 ```bash
 bundle audit check --update
+```
+
+This will update the advisory database and report any insecure gems or sources.
+
+### Run regularly
+This check should be run:
+
+- Before each release
+- After updating any dependencies
+- Periodically during maintenance
+
+GitHub Actions runs this check automatically on each push.
