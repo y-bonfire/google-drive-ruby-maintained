@@ -34,23 +34,5 @@ base64 -w 0 service_account.json > encoded.txt
 Secrets are not exposed to PRs from forked repositories for security reasons.
 
 
-## 🔐 Security Audit
+The security issue is explained in detail here
 
-We use [`bundler-audit`](https://github.com/rubysec/bundler-audit) to check for known vulnerabilities in gem dependencies.
-
-### Run manually
-
-```bash
-bundle audit check --update
-```
-
-This will update the advisory database and report any insecure gems or sources.
-
-### Run regularly
-This check should be run:
-
-- Before each release
-- After updating any dependencies
-- Periodically during maintenance
-
-GitHub Actions runs this check automatically on each push.

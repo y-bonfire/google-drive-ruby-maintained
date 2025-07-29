@@ -69,7 +69,7 @@ Follow one of the options in [Authorization](https://github.com/y-bonfire/google
 
 ### Contributing
 
-[Contributing](https://github.com/y-bonfire/google-drive-ruby-maintained/blob/develop/CONTRIBUTING.md) 
+[Contributing](https://github.com/y-bonfire/google-drive-ruby-maintained/blob/main/CONTRIBUTING.md) 
 
 ### Example to read/write files in Google Drive
 
