@@ -32,5 +32,5 @@ jobs:
       - name: Upload built gem
         uses: actions/upload-artifact@v4
         with:
-          name: google_drive_gem
-          path: google_drive-*.gem
+          name: google_drive_maintained_gem
+          path: google_drive_maintained-*.gem
