@@ -32,7 +32,7 @@ We welcome feedback and contributions to improve the CI process or test coverage
 ## <a name="migration">Migration from ver. 2.x.x or before</a>
 
 There are some incompatible API changes. See
-[MIGRATING.md](https://github.com/gimite/google-drive-ruby/blob/master/MIGRATING.md).
+[MIGRATING.md](MIGRATING.md).
 
 
 ## <a name="install">How to install</a>
