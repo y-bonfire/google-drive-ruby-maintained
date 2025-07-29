@@ -32,7 +32,7 @@ We welcome feedback and contributions to improve the CI process or test coverage
 ## <a name="migration">Migration from ver. 2.x.x or before</a>
 
 There are some incompatible API changes. See
-[MIGRATING.md](https://github.com/gimite/google-drive-ruby/blob/master/MIGRATING.md).
+[MIGRATING.md](MIGRATING.md).
 
 
 ## <a name="install">How to install</a>
@@ -65,11 +65,11 @@ $ sudo gem install google_drive_maintained
 
 ### Authorization
 
-Follow one of the options in [Authorization](https://github.com/y-bonfire/google-drive-ruby-maintained/blob/master/doc/authorization.md) to construct a session object. The example code below assumes "On behalf of you" option.
+Follow one of the options in [Authorization](doc/authorization.md) to construct a session object. The example code below assumes "On behalf of you" option.
 
 ### Contributing
 
-[Contributing](https://github.com/y-bonfire/google-drive-ruby-maintained/blob/main/CONTRIBUTING.md) 
+[Contributing](CONTRIBUTING.md) 
 
 ### Example to read/write files in Google Drive
 
