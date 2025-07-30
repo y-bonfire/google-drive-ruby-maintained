@@ -271,6 +271,19 @@ module GoogleDrive
     # If given an Array, traverses folders by title. e.g.:
     #   session.file_by_title(
     #     ["myfolder", "mysubfolder/even/w/slash", "myfile"])
+    # root
+    # └── myfolder
+    #     └── mysubfolder/even/w/slash
+    #         └── myfile
+    # In Google Drive,
+    #
+    # "mysubfolder/even/w/slash"
+    #
+    # is a folder with a single name that includes a slash.
+    # For example, you can create a folder named mysubfolder/even/w/slash directly
+    # This is not a UNIX-style "path."
+    #
+    # @return [GoogleDrive::File]
     def file_by_title(title)
       if title.is_a?(Array)
         root_collection.file_by_title(title)

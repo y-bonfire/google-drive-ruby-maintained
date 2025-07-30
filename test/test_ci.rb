@@ -55,8 +55,7 @@ class TestCi < Test::Unit::TestCase
     assert { last_work_sheet[2, 1] == '1' }
     assert { last_work_sheet[2, 2] == '2' }
 
-    @dst_spreadsheet.worksheets.each_with_index do |sheet, index|
-      next if index == 0
+    (@dst_spreadsheet.worksheets[1..-1] || []).each do |sheet|
       sheet.delete
     end
     @dst_spreadsheet.worksheets[0].reload

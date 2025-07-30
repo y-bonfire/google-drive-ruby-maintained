@@ -27,6 +27,7 @@ module SessionHelper
     ENV['GOOGLE_DRIVE_AUTH_TYPE'] || AuthType::USER_ACCOUNT
   end
 
+  # @return [GoogleDrive::Session]
   def get_session
     unless @@session
       puts CREATE_ACCOUNT_MESSAGE
