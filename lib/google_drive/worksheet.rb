@@ -635,7 +635,7 @@ module GoogleDrive
     #     {bottom: Google::Apis::SheetsV4::Border.new(
     #       style: "DOUBLE", color: GoogleDrive::Worksheet::Colors::BLACK)})
     def update_borders(top_row, left_col, num_rows, num_cols, borders)
-      request = Google::Apis::SheetsV4::UpdateBordersRequest.new(borders)
+      request = Google::Apis::SheetsV4::UpdateBordersRequest.new(**borders)
       request.range = v4_range_object(top_row, left_col, num_rows, num_cols)
       add_request({update_borders: request})
     end
