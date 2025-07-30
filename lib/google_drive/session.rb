@@ -77,6 +77,7 @@ module GoogleDrive
     # As with from_config, you can configure Google API client behavior with
     # +client_options+ and +request_options+. Unlike in from_config, these
     # are passed as positional arguments.
+    # @return [GoogleDrive::Session]
     def self.from_service_account_key(
         json_key_path_or_io, scope = DEFAULT_SCOPE, client_options = nil,
         request_options = nil
@@ -270,6 +271,19 @@ module GoogleDrive
     # If given an Array, traverses folders by title. e.g.:
     #   session.file_by_title(
     #     ["myfolder", "mysubfolder/even/w/slash", "myfile"])
+    # root
+    # └── myfolder
+    #     └── mysubfolder/even/w/slash
+    #         └── myfile
+    # In Google Drive,
+    #
+    # "mysubfolder/even/w/slash"
+    #
+    # is a folder with a single name that includes a slash.
+    # For example, you can create a folder named mysubfolder/even/w/slash directly
+    # This is not a UNIX-style "path."
+    #
+    # @return [GoogleDrive::File]
     def file_by_title(title)
       if title.is_a?(Array)
         root_collection.file_by_title(title)
@@ -329,6 +343,7 @@ module GoogleDrive
     #   # https://docs.google.com/spreadsheets/d/1L3-kvwJblyW_TvjYD-7pE-AXxw5_bkb6S_MljuIPVL0/edit
     #   session.spreadsheet_by_key(
     #     "1L3-kvwJblyW_TvjYD-7pE-AXxw5_bkb6S_MljuIPVL0")
+    # @return [GoogleDrive::Spreadsheet]
     def spreadsheet_by_key(key)
       file = file_by_id(key)
       unless file.is_a?(Spreadsheet)

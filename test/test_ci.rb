@@ -36,7 +36,6 @@ class TestCi < Test::Unit::TestCase
   end
 
   def test_copy_to
-    # @param worksheet [GoogleDrive::Worksheet]
     @worksheet.reload
     @worksheet[1, 1] = 'A'
     @worksheet[1, 2] = 'B'
@@ -56,9 +55,7 @@ class TestCi < Test::Unit::TestCase
     assert { last_work_sheet[2, 1] == '1' }
     assert { last_work_sheet[2, 2] == '2' }
 
-    # @param dst_spreadsheet [GoogleDrive::Spreadsheet]
-    @dst_spreadsheet.worksheets.each_with_index do |sheet, index|
-      next if index == 0
+    (@dst_spreadsheet.worksheets[1..-1] || []).each do |sheet|
       sheet.delete
     end
     @dst_spreadsheet.worksheets[0].reload
