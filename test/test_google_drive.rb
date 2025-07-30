@@ -7,15 +7,16 @@ require 'highline'
 require 'test/unit'
 
 require 'google_drive'
+require_relative 'test_helper'
 
 class TestGoogleDrive < Test::Unit::TestCase
+  include(SessionHelper)
   # Random string is added to avoid conflict with existing file titles.
   PREFIX = 'google-drive-ruby-test-4101301e303c-'.freeze
 
-  @@session = nil
-
   def test_spreadsheet_online
     session = get_session
+    return unless auth_type == AuthType::USER_ACCOUNT
 
     ss_title = "#{PREFIX}spreadsheet"
     ss_copy_title = "#{PREFIX}spreadsheet-copy"
@@ -189,6 +190,7 @@ class TestGoogleDrive < Test::Unit::TestCase
   # Tests various manipulations with files and collections.
   def test_collection_and_file_online
     session = get_session
+    return unless auth_type == AuthType::USER_ACCOUNT
 
     # Gets root collection.
     root = session.root_collection
@@ -323,6 +325,7 @@ class TestGoogleDrive < Test::Unit::TestCase
 
   def test_acl_online
     session = get_session
+    return unless auth_type == AuthType::USER_ACCOUNT
 
     test_file_title = "#{PREFIX}acl-test-file"
 
@@ -357,52 +360,6 @@ class TestGoogleDrive < Test::Unit::TestCase
     assert { acl[0].role == 'writer' }
 
     delete_test_file(file, true)
-  end
-
-  def get_session
-    unless @@session
-      puts(
-        "\nThis test will create files/spreadsheets/collections with your " \
-          'account, read/write them and finally delete them (if everything ' \
-          'succeeds).'
-      )
-
-      account_path = File.join(File.dirname(__FILE__), 'account.yaml')
-      config_path = File.join(File.dirname(__FILE__), 'config.json')
-      if File.exist?(account_path)
-        raise(
-          format(
-            "%s is deprecated. Please delete it.\n" \
-              'Instead, follow one of the instructions here to create either ' \
-              'config.json or a service account key JSON file and put it at ' \
-              "%s:\n" \
-              'https://github.com/gimite/google-drive-ruby/blob/master/' \
-              "README.md\#how-to-use",
-            account_path, config_path
-          )
-        )
-      end
-      unless File.exist?(config_path)
-        raise(
-          format(
-            "%s is missing.\n" \
-              'Follow one of the instructions here to create either ' \
-              'config.json or a service account key JSON file and put it at ' \
-              "%s:\n" \
-              'https://github.com/gimite/google-drive-ruby/blob/master/doc/' \
-              'authorization.md',
-            config_path, config_path
-          )
-        )
-      end
-
-      @@session = GoogleDrive::Session.from_config(
-        config_path,
-        client_options: { transparent_gzip_decompression: true },
-        request_options: { retries: 3 }
-      )
-    end
-    @@session
   end
 
   # Wrapper of GoogleDrive::File#delete which makes sure not to delete non-test
