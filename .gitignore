@@ -9,3 +9,4 @@ Gemfile.lock
 .idea
 .gem_rbs_collection
 .env
+test/service_account.json
