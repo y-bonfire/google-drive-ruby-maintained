@@ -16,7 +16,7 @@ MISSING_CONFIG_MESSAGE_TEMPLATE = <<~MSG.freeze
 MSG
 
 module AuthType
-  SERVICE_ACCOUNT = 'service'
+  SERVICE_ACCOUNT = 'service_account'
   USER_ACCOUNT = 'user_account'
 end
 
@@ -30,6 +30,14 @@ module SessionHelper
   def get_session
     unless @@session
       puts CREATE_ACCOUNT_MESSAGE
+      case auth_type
+      when AuthType::SERVICE_ACCOUNT
+        puts "test execute by service_account mode. cannot create/delete files"
+      when AuthType::USER_ACCOUNT
+        puts "test execute by user_account mode"
+      else
+        raise "Unsupported GOOGLE_DRIVE_AUTH_TYPE: #{ENV['GOOGLE_DRIVE_AUTH_TYPE']}"
+      end
     end
     account_path = File.join(File.dirname(__FILE__), 'account.yaml')
     config_path = File.join(File.dirname(__FILE__), 'config.json')
