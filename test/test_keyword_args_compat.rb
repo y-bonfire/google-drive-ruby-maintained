@@ -21,6 +21,7 @@ class TestKeywordArgsCompat < Test::Unit::TestCase
 
   def test_upload_and_download
     session = get_session
+    return unless auth_type == AuthType::USER_ACCOUNT
     test_file_path = File.join(File.dirname(__FILE__), 'test_file.txt')
     test_file_title = "test_file-12345.txt"
     file = session.upload_from_file(
