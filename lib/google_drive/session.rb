@@ -77,6 +77,7 @@ module GoogleDrive
     # As with from_config, you can configure Google API client behavior with
     # +client_options+ and +request_options+. Unlike in from_config, these
     # are passed as positional arguments.
+    # @return [GoogleDrive::Session]
     def self.from_service_account_key(
         json_key_path_or_io, scope = DEFAULT_SCOPE, client_options = nil,
         request_options = nil
@@ -329,6 +330,7 @@ module GoogleDrive
     #   # https://docs.google.com/spreadsheets/d/1L3-kvwJblyW_TvjYD-7pE-AXxw5_bkb6S_MljuIPVL0/edit
     #   session.spreadsheet_by_key(
     #     "1L3-kvwJblyW_TvjYD-7pE-AXxw5_bkb6S_MljuIPVL0")
+    # @return [GoogleDrive::Spreadsheet]
     def spreadsheet_by_key(key)
       file = file_by_id(key)
       unless file.is_a?(Spreadsheet)
