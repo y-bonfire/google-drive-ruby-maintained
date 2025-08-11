@@ -3,13 +3,14 @@ require 'forwardable'
 module GoogleDrive
 
   class Cell
-    attr_reader :row, :col, :value
+    attr_reader :row, :col, :value, :properties
 
-    def initialize(worksheet, row, col, value)
+    def initialize(worksheet, row, col, value, properties = {})
       @worksheet = worksheet
       @row = row
       @col = col
       @value = value
+      @properties = properties || {}
     end
 
     #
@@ -36,6 +37,9 @@ module GoogleDrive
       @worksheet.set_background_color(@row, @col, 1, 1, color)
     end
 
+    def hyperlink
+      @properties[:hyperlink]
+    end
   end
 
   module WorksheetFormatting

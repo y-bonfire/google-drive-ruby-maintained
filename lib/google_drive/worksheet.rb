@@ -63,6 +63,7 @@ module GoogleDrive
       @cells = nil
       @input_values = nil
       @numeric_values = nil
+      @cell_properties = nil
       @modified = Set.new
       @list = nil
       @v4_requests = []
@@ -171,7 +172,7 @@ module GoogleDrive
     def [](*args)
       (row, col) = parse_cell_args(args)
       value = cells[[row, col]] || ''
-      Cell.new(self, row, col, value)
+      Cell.new(self, row, col, value, @cell_properties[[row, col]])
     end
 
     # Updates content of the cell.
@@ -192,6 +193,7 @@ module GoogleDrive
       @cells[[row, col]] = value
       @input_values[[row, col]] = value
       @numeric_values[[row, col]] = nil
+      @cell_properties[[row, col]] = nil
       @modified.add([row, col])
       self.max_rows = row if row > @max_rows
       self.max_cols = col if col > @max_cols
@@ -391,7 +393,7 @@ module GoogleDrive
           ranges: "'%s'" % @title,
           fields:
             'sheets(properties,data.rowData.values' \
-            '(formattedValue,userEnteredValue,effectiveValue))'
+            '(formattedValue,userEnteredValue,effectiveValue,hyperlink))'
         )
       api_sheet = api_spreadsheet.sheets[0]
       set_properties(api_sheet.properties)
@@ -685,7 +687,7 @@ module GoogleDrive
           @session.sheets_service.get_spreadsheet(
               spreadsheet.id,
               ranges: "'%s'" % @remote_title,
-              fields: 'sheets.data.rowData.values(formattedValue,userEnteredValue,effectiveValue)'
+              fields: 'sheets.data.rowData.values(formattedValue,userEnteredValue,effectiveValue,hyperlink)'
           )
       update_cells_from_api_sheet(response.sheets[0])
     end
@@ -698,6 +700,7 @@ module GoogleDrive
       @cells = {}
       @input_values = {}
       @numeric_values = {}
+      @cell_properties = {}
 
       rows_data.each_with_index do |row_data, r|
         next if !row_data.values
@@ -709,6 +712,7 @@ module GoogleDrive
           @numeric_values[k] =
               cell_data.effective_value && cell_data.effective_value.number_value ?
                   cell_data.effective_value.number_value.to_f : nil
+          @cell_properties[k] = { hyperlink: cell_data.hyperlink }
         end
       end
 
