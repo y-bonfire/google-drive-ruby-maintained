@@ -25,4 +25,26 @@ class TestSpreadsheetDecoration < Test::Unit::TestCase
     worksheet.save
   end
 
+  def test_hyperlink
+    session = get_session
+    spreadsheet_id = ENV['GOOGLE_DRIVE_TEST_SPREADSHEET_ID']
+    spreadsheet = session.spreadsheet_by_key(spreadsheet_id)
+    worksheet = spreadsheet.worksheets.first
+    worksheet.set_hyperlink_rich(1,1,1,1, "google", "https://www.google.com/")
+    # another way
+    worksheet[2,1].set_hyperlink_rich("gemini", "https://gemini.google.com/")
+
+    # It seems that you can't set a value and a link to a cell
+    # with the same index at the same time, probably because of
+    # duplicate requests.
+    #worksheet[2,1] = "gemini"
+    #worksheet[2,1].hyperlink = "https://gemini.google.com/app?hl=ja"
+    
+    worksheet.save
+    worksheet.reload
+
+    assert{worksheet[1,1].hyperlink == "https://www.google.com/"}
+    assert{worksheet[2,1].hyperlink == "https://gemini.google.com/"}
+  end
+
 end

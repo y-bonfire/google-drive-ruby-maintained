@@ -5,10 +5,10 @@ require 'cgi'
 require 'set'
 require 'uri'
 
-require 'google_drive/util'
-require 'google_drive/error'
-require 'google_drive/list'
-require_relative "worksheet_formatting"
+require_relative 'util'
+require_relative 'error'
+require_relative 'list'
+require_relative "cell"
 
 module GoogleDrive
   # A worksheet (i.e. a tab) in a spreadsheet.
@@ -16,7 +16,6 @@ module GoogleDrive
   # object.
   class Worksheet
     include(Util)
-    include(WorksheetFormatting)
 
     # A few default color instances that match the colors from the Google Sheets web UI.
     #
@@ -588,6 +587,28 @@ module GoogleDrive
 
       fields = 'userEnteredFormat(%s)' % subfields.join(',')
       format_cells(top_row, left_col, num_rows, num_cols, format, fields)
+    end
+
+    def set_hyperlink_rich(top_row, left_col, num_rows, num_cols, text, uri)
+      cell = Google::Apis::SheetsV4::CellData.new(
+        user_entered_value: Google::Apis::SheetsV4::ExtendedValue.new(string_value: text),
+        text_format_runs: [
+          Google::Apis::SheetsV4::TextFormatRun.new(
+            start_index: 0,
+            format: Google::Apis::SheetsV4::TextFormat.new(
+              link: Google::Apis::SheetsV4::Link.new(uri: uri)
+            )
+          )
+        ]
+      )
+
+      add_request(
+        repeat_cell: Google::Apis::SheetsV4::RepeatCellRequest.new(
+          range: v4_range_object(top_row, left_col, num_rows, num_cols),
+          cell: cell,
+          fields: 'userEnteredValue,textFormatRuns'
+        )
+      )
     end
 
     # Changes the background color on a range of cells. e.g.:
