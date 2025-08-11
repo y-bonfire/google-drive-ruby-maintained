@@ -5,16 +5,22 @@ module GoogleDrive
   class Cell
     attr_reader :row, :col, :value
 
-    def initialize(worksheet, row, col, value)
+    # @!attribute [r] properties
+    #   @return [Hash] properties
+    attr_reader :properties
+
+    # @!attribute [rw] worksheet
+    #   @return [Worksheet] worksheet
+    attr_accessor :worksheet
+
+    def initialize(worksheet, row, col, value, properties = {})
       @worksheet = worksheet
       @row = row
       @col = col
       @value = value
+      @properties = properties || {}
     end
 
-    #
-    # === 等価性
-    #
     def ==(other)
       case other
       when GoogleDrive::Cell
@@ -36,18 +42,12 @@ module GoogleDrive
       @worksheet.set_background_color(@row, @col, 1, 1, color)
     end
 
-  end
-
-  module WorksheetFormatting
-
-    def set_background_color_at(row, col, color)
-      set_background_color(row, col, 1, 1, color)
+    def set_hyperlink_rich(text, hyperlink)
+      @worksheet.set_hyperlink_rich(@row, @col, 1, 1, text, hyperlink)
     end
 
-    def set_bold(row, col, enable = true)
-      # 太字設定
+    def hyperlink
+      @properties[:hyperlink]
     end
-
-    # ... 他にも text_color, font_size など拡張しやすい
   end
 end

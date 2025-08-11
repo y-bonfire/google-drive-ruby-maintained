@@ -5,10 +5,10 @@ require 'cgi'
 require 'set'
 require 'uri'
 
-require 'google_drive/util'
-require 'google_drive/error'
-require 'google_drive/list'
-require_relative "worksheet_formatting"
+require_relative 'util'
+require_relative 'error'
+require_relative 'list'
+require_relative "cell"
 
 module GoogleDrive
   # A worksheet (i.e. a tab) in a spreadsheet.
@@ -16,7 +16,6 @@ module GoogleDrive
   # object.
   class Worksheet
     include(Util)
-    include(WorksheetFormatting)
 
     # A few default color instances that match the colors from the Google Sheets web UI.
     #
@@ -63,6 +62,7 @@ module GoogleDrive
       @cells = nil
       @input_values = nil
       @numeric_values = nil
+      @cell_properties = nil
       @modified = Set.new
       @list = nil
       @v4_requests = []
@@ -171,7 +171,7 @@ module GoogleDrive
     def [](*args)
       (row, col) = parse_cell_args(args)
       value = cells[[row, col]] || ''
-      Cell.new(self, row, col, value)
+      Cell.new(self, row, col, value, @cell_properties[[row, col]])
     end
 
     # Updates content of the cell.
@@ -192,6 +192,7 @@ module GoogleDrive
       @cells[[row, col]] = value
       @input_values[[row, col]] = value
       @numeric_values[[row, col]] = nil
+      @cell_properties[[row, col]] = nil
       @modified.add([row, col])
       self.max_rows = row if row > @max_rows
       self.max_cols = col if col > @max_cols
@@ -391,7 +392,7 @@ module GoogleDrive
           ranges: "'%s'" % @title,
           fields:
             'sheets(properties,data.rowData.values' \
-            '(formattedValue,userEnteredValue,effectiveValue))'
+            '(formattedValue,userEnteredValue,effectiveValue,hyperlink))'
         )
       api_sheet = api_spreadsheet.sheets[0]
       set_properties(api_sheet.properties)
@@ -588,6 +589,28 @@ module GoogleDrive
       format_cells(top_row, left_col, num_rows, num_cols, format, fields)
     end
 
+    def set_hyperlink_rich(top_row, left_col, num_rows, num_cols, text, uri)
+      cell = Google::Apis::SheetsV4::CellData.new(
+        user_entered_value: Google::Apis::SheetsV4::ExtendedValue.new(string_value: text),
+        text_format_runs: [
+          Google::Apis::SheetsV4::TextFormatRun.new(
+            start_index: 0,
+            format: Google::Apis::SheetsV4::TextFormat.new(
+              link: Google::Apis::SheetsV4::Link.new(uri: uri)
+            )
+          )
+        ]
+      )
+
+      add_request(
+        repeat_cell: Google::Apis::SheetsV4::RepeatCellRequest.new(
+          range: v4_range_object(top_row, left_col, num_rows, num_cols),
+          cell: cell,
+          fields: 'userEnteredValue,textFormatRuns'
+        )
+      )
+    end
+
     # Changes the background color on a range of cells. e.g.:
     #   worksheet.set_background_color(1, 1, 1, 1, GoogleDrive::Worksheet::Colors::DARK_YELLOW_1)
     #
@@ -685,7 +708,7 @@ module GoogleDrive
           @session.sheets_service.get_spreadsheet(
               spreadsheet.id,
               ranges: "'%s'" % @remote_title,
-              fields: 'sheets.data.rowData.values(formattedValue,userEnteredValue,effectiveValue)'
+              fields: 'sheets.data.rowData.values(formattedValue,userEnteredValue,effectiveValue,hyperlink)'
           )
       update_cells_from_api_sheet(response.sheets[0])
     end
@@ -698,6 +721,7 @@ module GoogleDrive
       @cells = {}
       @input_values = {}
       @numeric_values = {}
+      @cell_properties = {}
 
       rows_data.each_with_index do |row_data, r|
         next if !row_data.values
@@ -709,6 +733,7 @@ module GoogleDrive
           @numeric_values[k] =
               cell_data.effective_value && cell_data.effective_value.number_value ?
                   cell_data.effective_value.number_value.to_f : nil
+          @cell_properties[k] = { hyperlink: cell_data.hyperlink }
         end
       end
 
