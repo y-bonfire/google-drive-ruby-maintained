@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name = 'google_drive_maintained'
-  spec.version = '3.0.10'
+  spec.version = '3.0.11'
   spec.authors = ['Hiroshi Ichikawa']
   spec.email = ['gimite+github@gmail.com']
   spec.summary = 'Access and manipulate spreadsheets and files in Google Drive easily.'
