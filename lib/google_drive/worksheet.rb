@@ -420,7 +420,7 @@ module GoogleDrive
         })
       end
 
-      if !@v4_requests.empty?
+      unless @v4_requests.empty?
         self.spreadsheet.batch_update(@v4_requests)
         @v4_requests = []
         sent = true
@@ -724,14 +724,14 @@ module GoogleDrive
       @cell_properties = {}
 
       rows_data.each_with_index do |row_data, r|
-        next if !row_data.values
+        next unless row_data.values
         @num_cols = row_data.values.size if row_data.values.size > @num_cols
         row_data.values.each_with_index do |cell_data, c|
           k = [r + 1, c + 1]
           @cells[k] = cell_data.formatted_value || ''
           @input_values[k] = extended_value_to_str(cell_data.user_entered_value)
           @numeric_values[k] =
-              cell_data.effective_value && cell_data.effective_value.number_value ?
+            cell_data.effective_value&.number_value ?
                   cell_data.effective_value.number_value.to_f : nil
           @cell_properties[k] = { hyperlink: cell_data.hyperlink }
         end
